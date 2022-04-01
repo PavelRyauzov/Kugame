@@ -2,20 +2,20 @@ package Model.gamefield;
 
 import Model.gamefield.Cell;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CellRow {
 
     // ----------------------- Свойства --------------------------
     private int _startOfLine;
-    private int _length;
-    private HashMap<Integer, Cell> cells = new HashMap<>();
+    private ArrayList<Cell> cells = new ArrayList<>();
 
     public Cell getCell(int cellIndex) { return cells.get(cellIndex); }
 
     public int startOfLine() { return _startOfLine; }
 
-    public int length() { return _length; }
+    public int length() { return cells.size(); }
 
     private void validate(int startOfLine, int cellNumber) {
         if(startOfLine < 0 || cellNumber < 0) {
@@ -29,10 +29,9 @@ public class CellRow {
         validate(startOfLine, cellNumber);
 
         _startOfLine = startOfLine;
-        _length = cellNumber;
 
         for (int i = 0; i < cellNumber; i++) {
-            cells.put(i, new Cell());
+            cells.add(new Cell());
         }
     }
 }

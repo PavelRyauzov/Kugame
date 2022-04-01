@@ -1,7 +1,11 @@
 import Model.Game;
+import Model.gamefield.Direction;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
 import Model.maps.SimpleGameMap;
+import Model.units.Ball;
+
+import java.util.ArrayList;
 
 public class Main {
 
@@ -10,9 +14,11 @@ public class Main {
         Game game = new Game(map);
         GameField field = game.constructLevel();
 
-        if (field != null) {
-            System.out.println("Все ок!!!");
-        }
+        ArrayList<Ball> balls = field.balls();
+
+        balls.get(0).move(Direction.east());
+
+        System.out.println("Все ок!");
 
     }
 }

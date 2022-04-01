@@ -5,17 +5,22 @@ import Model.gamefield.GameMap;
 
 public class Game {
 
-    private GameMap map;
+    private GameField _field;
+    private GameMap _map;
 
     public Game(GameMap map) {
         super();
-        this.map = map;
-        if (this.map == null) {
-            throw new IllegalArgumentException("Ошибка при порождении GameMap");
+        _map = map;
+        if (_map == null) {
+            throw new IllegalArgumentException("Game can't work without Map!");
         }
     }
 
     public GameField constructLevel() {
-        return map.createField().seedBalls().seedBarriers().seedGoals().build();
+        return _map.createField().seedBalls().seedBarriers().seedGoals().build();
+    }
+
+    public void start() {
+        _field = constructLevel();
     }
 }

@@ -9,4 +9,8 @@ public class Unit {
     public void setOwner(Cell cell) {
         _owner = cell;
     }
+
+    public Cell getOwner() { return _owner; }
+
+    public void removeOwner() { _owner = null; }
 }

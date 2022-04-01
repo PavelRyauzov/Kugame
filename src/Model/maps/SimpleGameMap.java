@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class SimpleGameMap implements GameMap {
 
-    private HashMap<Integer, CellRow> cellRows = new HashMap<>();
+    private ArrayList<CellRow> cellRows = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
 
     public SimpleGameMap() {
@@ -25,10 +25,10 @@ public class SimpleGameMap implements GameMap {
     public GameMap createField() {
 
         // Создаем строки с ячейками
-        cellRows.put(0, new CellRow(2, 8));
-        cellRows.put(1, new CellRow(1, 9));
+        cellRows.add(new CellRow(2, 8));
+        cellRows.add(new CellRow(1, 9));
         for (int i = 2; i < 10; i++) {
-            cellRows.put(i, new CellRow(0, 10));
+            cellRows.add(new CellRow(0, 10));
         }
 
         // Связываем ячейки
@@ -98,6 +98,10 @@ public class SimpleGameMap implements GameMap {
         cellRows.get(2).getCell(8).setUnit(blueBall);
         balls.add(blueBall);
 
+//        Ball blueBall = new Ball(Color.blue);
+//        cellRows.get(3).getCell(3).setUnit(blueBall);
+//        balls.add(blueBall);
+
         return this;
     }
 
@@ -113,13 +117,12 @@ public class SimpleGameMap implements GameMap {
         Goal blueGoal = new Goal(Color.blue);
         cellRows.get(3).getCell(9).setUnit(blueGoal);
 
+//        Goal blueGoal = new Goal(Color.blue);
+//        cellRows.get(3).getCell(9).setUnit(blueGoal);
+
         return this;
     }
 
     @Override
-    public GameField build() {
-
-        GameField field = new GameField(cellRows, balls);
-        return field;
-    }
+    public GameField build() { return new GameField(cellRows, balls); }
 }

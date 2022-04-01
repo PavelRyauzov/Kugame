@@ -8,22 +8,24 @@ import java.util.HashMap;
 
 public class GameField {
 
-    public ArrayList<Ball> balls;
-    private HashMap<Integer, CellRow> cellRows;
+    private ArrayList<CellRow> _cellRows;
+    private ArrayList<Ball> _balls;
+
+    public ArrayList<Ball> balls() { return _balls; }
 
     public GameField() {
         super();
     }
 
-    public GameField(HashMap<Integer, CellRow> cellRows, ArrayList<Ball> balls) {
+    public GameField(ArrayList<CellRow> cellRows, ArrayList<Ball> balls) {
 
         this();
-        this.cellRows = cellRows;
-        this.balls = balls;
+        _cellRows = cellRows;
+        _balls = balls;
     }
 
     // Определить длину самой длинной строки
-    public static int lengthOfMaxRow(HashMap<Integer, CellRow> cellRows) {
+    public static int lengthOfMaxRow(ArrayList<CellRow> cellRows) {
 
         ArrayList<Integer> rowsLength = new ArrayList<>();
 

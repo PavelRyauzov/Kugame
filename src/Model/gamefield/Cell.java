@@ -52,4 +52,21 @@ public class Cell {
         _ownedUnit = unit;
         _ownedUnit.setOwner(this);
     }
+
+    public Unit extractUnit() {
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        Unit removedUnit =_ownedUnit;
+
+        _ownedUnit.removeOwner();
+
+        _ownedUnit = null;
+
+        return removedUnit;
+    }
+
+    public boolean isEmpty() { return _ownedUnit == null; }
 }

@@ -3,12 +3,24 @@ package Model.units;
 import Model.Unit;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Goal extends Unit {
 
-    Color _color;
+    private Color _color;
+
+    private ArrayList<Ball> _balls = new ArrayList<>();
 
     public Goal(Color color) {
         _color = color;
+    }
+
+    public boolean canPass(Ball ball) {
+        return ball.color() == _color;
+    }
+
+    public void takeBall(Ball ball) {
+        _balls.add((Ball) ball.getOwner().extractUnit());
     }
 }
