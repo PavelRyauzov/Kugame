@@ -86,21 +86,21 @@ public class SimpleGameMap implements GameMap {
     @Override
     public GameMap seedBalls() {
 
-        Ball redBall = new Ball(Color.red);
-        cellRows.get(3).getCell(4).setUnit(redBall);
-        balls.add(redBall);
-
-        Ball greenBall = new Ball(Color.green);
-        cellRows.get(7).getCell(3).setUnit(greenBall);
-        balls.add(greenBall);
+//        Ball redBall = new Ball(Color.red);
+//        cellRows.get(3).getCell(4).setUnit(redBall);
+//        balls.add(redBall);
+//
+//        Ball greenBall = new Ball(Color.green);
+//        cellRows.get(7).getCell(3).setUnit(greenBall);
+//        balls.add(greenBall);
+//
+//        Ball blueBall = new Ball(Color.blue);
+//        cellRows.get(2).getCell(8).setUnit(blueBall);
+//        balls.add(blueBall);
 
         Ball blueBall = new Ball(Color.blue);
-        cellRows.get(2).getCell(8).setUnit(blueBall);
+        cellRows.get(3).getCell(3).setUnit(blueBall);
         balls.add(blueBall);
-
-//        Ball blueBall = new Ball(Color.blue);
-//        cellRows.get(3).getCell(3).setUnit(blueBall);
-//        balls.add(blueBall);
 
         return this;
     }
@@ -108,17 +108,17 @@ public class SimpleGameMap implements GameMap {
     @Override
     public GameMap seedGoals() {
 
-        Goal redGoal = new Goal(Color.red);
-        cellRows.get(9).getCell(3).setUnit(redGoal);
-
-        Goal greenGoal = new Goal(Color.green);
-        cellRows.get(9).getCell(8).setUnit(greenGoal);
-
-        Goal blueGoal = new Goal(Color.blue);
-        cellRows.get(3).getCell(9).setUnit(blueGoal);
-
+//        Goal redGoal = new Goal(Color.red);
+//        cellRows.get(9).getCell(3).setUnit(redGoal);
+//
+//        Goal greenGoal = new Goal(Color.green);
+//        cellRows.get(9).getCell(8).setUnit(greenGoal);
+//
 //        Goal blueGoal = new Goal(Color.blue);
 //        cellRows.get(3).getCell(9).setUnit(blueGoal);
+//
+        Goal blueGoal = new Goal(Color.blue);
+        cellRows.get(4).getCell(9).setUnit(blueGoal);
 
         return this;
     }

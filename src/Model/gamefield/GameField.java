@@ -8,11 +8,17 @@ import java.util.HashMap;
 
 public class GameField {
 
+    // --------------------- Строки из ячеек -------------------
     private ArrayList<CellRow> _cellRows;
+
+    // ------------------------- Шарики -----------------------
     private ArrayList<Ball> _balls;
 
     public ArrayList<Ball> balls() { return _balls; }
 
+    public void deleteBall(Ball ball) { _balls.remove(ball); }
+
+    // ------------------------ Порождение ----------------------
     public GameField() {
         super();
     }

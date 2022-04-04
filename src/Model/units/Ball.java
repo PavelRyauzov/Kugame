@@ -17,12 +17,11 @@ public class Ball extends Unit {
     public Ball(Color color) { _color = color; }
 
     // -------------------- Перемещение --------------------
-    public boolean canMoveTo(Cell cell) { return cell.getUnit() == null; }
+    public boolean canMoveTo(Cell cell) { return cell.isEmpty(); }
 
     public void move(Direction direct) {
 
         do {
-            Cell currentCell = getOwner();
             Cell neighborCell = getOwner().neighbor(direct);
 
             if (neighborCell == null) {
