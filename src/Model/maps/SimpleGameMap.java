@@ -118,7 +118,7 @@ public class SimpleGameMap implements GameMap {
 //        cellRows.get(3).getCell(9).setUnit(blueGoal);
 //
         Goal blueGoal = new Goal(Color.blue);
-        cellRows.get(4).getCell(9).setUnit(blueGoal);
+        cellRows.get(3).getCell(9).setUnit(blueGoal);
 
         return this;
     }

@@ -10,15 +10,11 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-//        GameMap map = new SimpleGameMap();
-//        Game game = new Game(map);
-//        GameField field = game.constructLevel();
-//
-//        ArrayList<Ball> balls = field.balls();
-//
-//        balls.get(0).move(Direction.east());
-//
-//        System.out.println("Все ок!");
+        GameMap map = new SimpleGameMap();
+        Game game = new Game(map);
+        game.start();
+        
+        System.out.println("Все ок!");
 
     }
 }

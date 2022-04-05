@@ -4,6 +4,10 @@ import Model.events.BallActionEvent;
 import Model.events.BallActionListener;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
+import Model.units.Ball;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
@@ -19,7 +23,13 @@ public class Game {
     }
 
     public void start() {
+
         _field = constructLevel();
+
+        // "Наблюдаем" за событиями, связанные с действием шариков
+        for (Ball ball: _field.balls()) {
+            ball.addBallActionListener(new BallObserver());
+        }
     }
 
     private GameField constructLevel() {
@@ -31,7 +41,11 @@ public class Game {
 
         @Override
         public void ballHasMoved(BallActionEvent e) {
-            
+            if(e.ball().getOwner() == null) {
+                _field.deleteBall(e.ball());
+            }
         }
     }
+
+
 }

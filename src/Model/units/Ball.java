@@ -1,10 +1,14 @@
 package Model.units;
 
 import Model.Unit;
+import Model.events.BallActionEvent;
+import Model.events.BallActionListener;
 import Model.gamefield.Cell;
 import Model.gamefield.Direction;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ball extends Unit {
 
@@ -42,6 +46,26 @@ public class Ball extends Unit {
             if(goal.canPass(this)) {
                 goal.takeBall(this);
             }
+        }
+
+        fireBallHasMoved();
+    }
+
+    // ---------------------- Порождает события -----------------------------
+    private List<BallActionListener> _listeners = new ArrayList<>();
+
+    // Добавить слушателя
+    public void addBallActionListener(BallActionListener listener) {
+        _listeners.add(listener);
+    }
+
+    // Оповестить слушателя о событии
+    public void fireBallHasMoved() {
+
+        BallActionEvent event = new BallActionEvent(this);
+        event.setBall(this);
+        for (Object listener: _listeners) {
+            ((BallActionListener)listener).ballHasMoved(event);
         }
     }
 }

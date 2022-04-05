@@ -9,8 +9,16 @@ import java.util.EventObject;
  */
 public class BallActionEvent extends EventObject {
 
-    // -------------------------------- Шарик --------------------------------------
+    // ------------------------------ Шарик ------------------------------------
     Ball _ball;
+
+    public void setBall(Ball ball){
+        _ball = ball;
+    }
+
+    public Ball ball(){
+        return _ball;
+    }
 
     // Событие связанное с деятельностью Шарика
     public BallActionEvent(Object source) {
