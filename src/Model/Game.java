@@ -2,6 +2,8 @@ package Model;
 
 import Model.events.BallActionEvent;
 import Model.events.BallActionListener;
+import Model.events.GameEvent;
+import Model.events.GameListener;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
 import Model.units.Ball;
@@ -26,7 +28,7 @@ public class Game {
 
         _field = constructLevel();
 
-        // "Наблюдаем" за событиями, связанные с действием шариков
+        // "Наблюдаем" за событиями, связанными с движениями шариков
         for (Ball ball: _field.balls()) {
             ball.addBallActionListener(new BallObserver());
         }
@@ -36,7 +38,9 @@ public class Game {
         return _map.createField().seedBalls().seedBarriers().seedGoals().build();
     }
 
-    // ------------------------- Реагируем на действия Шариков ------------------
+
+    // ------------------------- Реагируем на действия Шарика ------------------
+
     private class BallObserver implements BallActionListener {
 
         @Override
@@ -44,8 +48,32 @@ public class Game {
             if(e.ball().getOwner() == null) {
                 _field.deleteBall(e.ball());
             }
+
+            if (_field.balls().isEmpty()) {
+                fireGameFinished();
+            }
         }
     }
 
 
+// ------------------------ Порождает события игры ----------------------------
+
+    private ArrayList _listeners = new ArrayList();
+
+    public void addGameListener(GameListener l) {
+        _listeners.add(l);
+    }
+
+    public void removeGameListener(GameListener l) {
+        _listeners.remove(l);
+    }
+
+    protected void fireGameFinished() {
+
+        GameEvent event = new GameEvent(this);
+
+        for (Object listener: _listeners) {
+            ((GameListener)listener).gameFinished(event);
+        }
+    }
 }
