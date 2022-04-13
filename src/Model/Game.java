@@ -14,6 +14,9 @@ import java.util.List;
 public class Game {
 
     private GameField _field;
+
+    public GameField field() { return _field; }
+
     private GameMap _map;
 
     public Game(GameMap map) {

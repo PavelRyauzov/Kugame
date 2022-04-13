@@ -11,6 +11,8 @@ public class GameField {
     // --------------------- Строки из ячеек -------------------
     private ArrayList<CellRow> _cellRows;
 
+    public ArrayList<CellRow> cellRows() { return _cellRows; }
+
     // ------------------------- Шарики -----------------------
     private ArrayList<Ball> _balls;
 

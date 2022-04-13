@@ -78,4 +78,9 @@ public class Ball extends Unit {
             ((BallActionListener)listener).ballHasMoved(event);
         }
     }
+
+    @Override
+    public String toString() {
+        return "B";
+    }
 }

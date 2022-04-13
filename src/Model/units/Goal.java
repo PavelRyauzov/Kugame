@@ -23,4 +23,9 @@ public class Goal extends Unit {
     public void takeBall(Ball ball) {
         _balls.add((Ball) ball.getOwner().extractUnit());
     }
+
+    @Override
+    public String toString() {
+        return "G";
+    }
 }

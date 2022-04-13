@@ -11,6 +11,8 @@ public class CellRow {
     private int _startOfLine;
     private ArrayList<Cell> cells = new ArrayList<>();
 
+    public ArrayList<Cell> cells() { return cells; }
+
     public Cell getCell(int cellIndex) { return cells.get(cellIndex); }
 
     public int startOfLine() { return _startOfLine; }

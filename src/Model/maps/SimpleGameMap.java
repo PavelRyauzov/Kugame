@@ -76,7 +76,7 @@ public class SimpleGameMap implements GameMap {
         }
 
         // Снизу
-        for (int cellIndex = 0; cellIndex < cellRows.get(0).length(); cellIndex++) {
+        for (int cellIndex = 0; cellIndex < cellRows.get(9).length(); cellIndex++) {
             cellRows.get(cellRows.size() - 1).getCell(cellIndex).setUnit(new Barrier());
         }
 
