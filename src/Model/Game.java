@@ -55,6 +55,13 @@ public class Game {
             if (_field.balls().isEmpty()) {
                 fireGameFinished();
             }
+
+            fireBallHasMoved(e.ball());
+        }
+
+        @Override
+        public void ballHasAStep(BallActionEvent e) {
+            fireBallHasAStep(e.ball());
         }
     }
 
@@ -79,4 +86,36 @@ public class Game {
             ((GameListener)listener).gameFinished(event);
         }
     }
+
+
+// ------------------ Порождает события, связанные с движением Шариков ---------------------
+
+    private List<BallActionListener> _ballListeners = new ArrayList<>();
+
+    public void addBallActionListener(BallActionListener listener) {
+        _ballListeners.add(listener);
+    }
+
+    public void removeBallActionListener(BallActionListener listener) {
+        _ballListeners.remove(listener);
+    }
+
+    protected void fireBallHasMoved(Ball ball) {
+
+        BallActionEvent event = new BallActionEvent(ball);
+        event.setBall(ball);
+        for (Object listener: _ballListeners) {
+            ((BallActionListener)listener).ballHasMoved(event);
+        }
+    }
+
+    protected void fireBallHasAStep(Ball ball) {
+        BallActionEvent event = new BallActionEvent(ball);
+        event.setBall(ball);
+        for (Object listener: _ballListeners) {
+            ((BallActionListener)listener).ballHasAStep(event);
+        }
+    }
 }
+
+

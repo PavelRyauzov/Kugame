@@ -7,9 +7,13 @@ import Model.events.GameListener;
 import Model.gamefield.Cell;
 import Model.gamefield.Direction;
 
+import javax.swing.*;
 import java.awt.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Ball extends Unit {
 
@@ -30,21 +34,11 @@ public class Ball extends Unit {
     public boolean canMoveTo(Cell cell) { return cell.isEmpty(); }
 
     public void move(Direction direct) {
+        Timer timer = new Timer();
 
-        do {
-            Cell neighborCell = getOwner().neighbor(direct);
+        TimerTask task = new MyTimerTask(direct, timer);
 
-            if (neighborCell == null) {
-                return;
-            }
-
-            if (!neighborCell.isEmpty()) {
-                return;
-            }
-
-            neighborCell.setUnit(getOwner().extractUnit());
-
-        } while (canMoveTo(getOwner().neighbor(direct)));
+        timer.schedule(task, 100, 250);
 
         if (getOwner().neighbor(direct).getUnit() instanceof Goal) {
             Goal goal = (Goal) getOwner().neighbor(direct).getUnit();
@@ -54,7 +48,52 @@ public class Ball extends Unit {
             }
         }
 
-        fireBallHasMoved();
+        //timer.cancel();
+
+        //fireBallHasMoved();
+    }
+
+    public void doStep(Direction direct) {
+
+        Cell neighborCell = getOwner().neighbor(direct);
+
+        if (neighborCell == null) {
+            return;
+        }
+
+        if (!neighborCell.isEmpty()) {
+            return;
+        }
+
+        neighborCell.setUnit(getOwner().extractUnit());
+    }
+
+    private void printmsg() {
+        JOptionPane.showMessageDialog(null, "Метод run", "Таймер!", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    private class MyTimerTask extends TimerTask {
+        Direction direction;
+        Timer _timer;
+
+        MyTimerTask(Direction direct, Timer timer) {
+            direction = direct;
+            _timer = timer;
+        }
+
+        @Override
+        public void run() {
+
+            doStep(direction);
+
+            //printmsg();
+            fireBallHasAStep();
+
+            if (!canMoveTo(getOwner().neighbor(direction))) {
+                _timer.cancel();
+            }
+        }
     }
 
 
@@ -76,6 +115,14 @@ public class Ball extends Unit {
         event.setBall(this);
         for (Object listener: _listeners) {
             ((BallActionListener)listener).ballHasMoved(event);
+        }
+    }
+
+    protected void fireBallHasAStep() {
+        BallActionEvent event = new BallActionEvent(this);
+        event.setBall(this);
+        for (Object listener: _listeners) {
+            ((BallActionListener)listener).ballHasAStep(event);
         }
     }
 

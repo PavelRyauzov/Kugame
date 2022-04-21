@@ -11,6 +11,8 @@ import Model.units.Ball;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameFieldView extends JPanel {
 
@@ -90,8 +92,7 @@ public class GameFieldView extends JPanel {
 
                         Ball ball = (Ball) _field.cellRows().get(originalRowIndex).getCell(originalCellIndex - _field.cellRows().get(originalRowIndex).startOfLine()).getUnit();
                         ball.move(direct);
-
-                        repaint();
+                        //repaint();
                     }
                 }
             }

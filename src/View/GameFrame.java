@@ -8,12 +8,14 @@ import Model.events.GameListener;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
 import Model.maps.SimpleGameMap;
+import Model.units.Ball;
 
 import javax.swing.*;
 
 public class GameFrame extends JFrame {
 
     Game _game;
+    GameFieldView _mainBox;
 
     public GameFrame() {
 
@@ -23,9 +25,13 @@ public class GameFrame extends JFrame {
 
         _game.addGameListener(new GameObserver());
 
-        GameFieldView mainBox = new GameFieldView(_game.field());
+        for (Ball ball: _game.field().balls()) {
+            _game.addBallActionListener(new BallObserver());
+        }
 
-        setContentPane(mainBox);
+        _mainBox = new GameFieldView(_game.field());
+
+        setContentPane(_mainBox);
         pack();
         setResizable(false);
         setFocusable(true);
@@ -41,9 +47,23 @@ public class GameFrame extends JFrame {
 
             if (_game.field().balls().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ура! Все шарики загнаны в ворота!", "Победа!", JOptionPane.INFORMATION_MESSAGE);
-
                 System.exit(0);
             }
+        }
+    }
+
+    // ------------------------- Реагируем на действия Шарика ------------------
+
+    private class BallObserver implements BallActionListener {
+
+        @Override
+        public void ballHasMoved(BallActionEvent e) {
+           // _mainBox.repaint();
+        }
+
+        @Override
+        public void ballHasAStep(BallActionEvent e) {
+            _mainBox.repaint();
         }
     }
 }
