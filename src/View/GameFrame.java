@@ -11,6 +11,7 @@ import Model.maps.SimpleGameMap;
 import Model.units.Ball;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GameFrame extends JFrame {
 
@@ -45,6 +46,8 @@ public class GameFrame extends JFrame {
         @Override
         public void gameFinished(GameEvent e) {
 
+            _mainBox.repaint();
+
             if (_game.field().balls().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Ура! Все шарики загнаны в ворота!", "Победа!", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
@@ -57,13 +60,19 @@ public class GameFrame extends JFrame {
     private class BallObserver implements BallActionListener {
 
         @Override
-        public void ballHasMoved(BallActionEvent e) {
-           // _mainBox.repaint();
+        public void ballHasDisappeared(BallActionEvent e) {
+
         }
 
         @Override
         public void ballHasAStep(BallActionEvent e) {
+            setEnabled(false);
             _mainBox.repaint();
+        }
+
+        @Override
+        public void ballHasAMoved(BallActionEvent e) {
+            setEnabled(true);
         }
     }
 }

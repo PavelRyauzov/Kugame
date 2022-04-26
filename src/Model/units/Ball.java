@@ -3,13 +3,10 @@ package Model.units;
 import Model.Unit;
 import Model.events.BallActionEvent;
 import Model.events.BallActionListener;
-import Model.events.GameListener;
 import Model.gamefield.Cell;
 import Model.gamefield.Direction;
 
-import javax.swing.*;
 import java.awt.*;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -34,26 +31,51 @@ public class Ball extends Unit {
     public boolean canMoveTo(Cell cell) { return cell.isEmpty(); }
 
     public void move(Direction direct) {
+
         Timer timer = new Timer();
+        TimerTask task = new BallTimerTask(timer, this, direct);
 
-        TimerTask task = new MyTimerTask(direct, timer);
-
-        timer.schedule(task, 100, 250);
-
-        if (getOwner().neighbor(direct).getUnit() instanceof Goal) {
-            Goal goal = (Goal) getOwner().neighbor(direct).getUnit();
-
-            if(goal.canPass(this)) {
-                goal.takeBall(this);
-            }
-        }
-
-        //timer.cancel();
-
-        //fireBallHasMoved();
+        int delay = 100;
+        int period = 100;
+        timer.schedule(task, delay, period);
     }
 
-    public void doStep(Direction direct) {
+    private class BallTimerTask extends TimerTask {
+
+        Timer _timer;
+        Ball _ball;
+        Direction _direction;
+
+        BallTimerTask(Timer timer, Ball ball, Direction direct) {
+
+            _timer = timer;
+            _ball = ball;
+            _direction = direct;
+        }
+
+        @Override
+        public void run() {
+
+            if (canMoveTo(getOwner().neighbor(_direction))) {
+                doStep(_direction);
+                fireBallHasAStep();
+            } else {
+                _timer.cancel();
+
+                if (getOwner().neighbor(_direction).getUnit() instanceof Goal goal) {
+
+                    if(goal.canPass(_ball)) {
+                        goal.takeBall(_ball);
+                        fireBallHasDisappeared();
+                    }
+                }
+
+                fireBallHasAMoved();
+            }
+        }
+    }
+
+    private void doStep(Direction direct) {
 
         Cell neighborCell = getOwner().neighbor(direct);
 
@@ -66,34 +88,6 @@ public class Ball extends Unit {
         }
 
         neighborCell.setUnit(getOwner().extractUnit());
-    }
-
-    private void printmsg() {
-        JOptionPane.showMessageDialog(null, "Метод run", "Таймер!", JOptionPane.INFORMATION_MESSAGE);
-
-    }
-
-    private class MyTimerTask extends TimerTask {
-        Direction direction;
-        Timer _timer;
-
-        MyTimerTask(Direction direct, Timer timer) {
-            direction = direct;
-            _timer = timer;
-        }
-
-        @Override
-        public void run() {
-
-            doStep(direction);
-
-            //printmsg();
-            fireBallHasAStep();
-
-            if (!canMoveTo(getOwner().neighbor(direction))) {
-                _timer.cancel();
-            }
-        }
     }
 
 
@@ -109,12 +103,12 @@ public class Ball extends Unit {
         _listeners.remove(listener);
     }
 
-    protected void fireBallHasMoved() {
+    protected void fireBallHasDisappeared() {
 
         BallActionEvent event = new BallActionEvent(this);
         event.setBall(this);
         for (Object listener: _listeners) {
-            ((BallActionListener)listener).ballHasMoved(event);
+            ((BallActionListener)listener).ballHasDisappeared(event);
         }
     }
 
@@ -123,6 +117,14 @@ public class Ball extends Unit {
         event.setBall(this);
         for (Object listener: _listeners) {
             ((BallActionListener)listener).ballHasAStep(event);
+        }
+    }
+
+    protected void fireBallHasAMoved() {
+        BallActionEvent event = new BallActionEvent(this);
+        event.setBall(this);
+        for (Object listener: _listeners) {
+            ((BallActionListener)listener).ballHasAMoved(event);
         }
     }
 

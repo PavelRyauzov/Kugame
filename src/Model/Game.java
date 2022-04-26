@@ -47,7 +47,7 @@ public class Game {
     private class BallObserver implements BallActionListener {
 
         @Override
-        public void ballHasMoved(BallActionEvent e) {
+        public void ballHasDisappeared(BallActionEvent e) {
             if(e.ball().getOwner() == null) {
                 _field.deleteBall(e.ball());
             }
@@ -56,12 +56,17 @@ public class Game {
                 fireGameFinished();
             }
 
-            fireBallHasMoved(e.ball());
+            fireBallHasDisappeared(e.ball());
         }
 
         @Override
         public void ballHasAStep(BallActionEvent e) {
             fireBallHasAStep(e.ball());
+        }
+
+        @Override
+        public void ballHasAMoved(BallActionEvent e) {
+            fireBallHasAMoved(e.ball());
         }
     }
 
@@ -100,12 +105,12 @@ public class Game {
         _ballListeners.remove(listener);
     }
 
-    protected void fireBallHasMoved(Ball ball) {
+    protected void fireBallHasDisappeared(Ball ball) {
 
         BallActionEvent event = new BallActionEvent(ball);
         event.setBall(ball);
         for (Object listener: _ballListeners) {
-            ((BallActionListener)listener).ballHasMoved(event);
+            ((BallActionListener)listener).ballHasDisappeared(event);
         }
     }
 
@@ -114,6 +119,14 @@ public class Game {
         event.setBall(ball);
         for (Object listener: _ballListeners) {
             ((BallActionListener)listener).ballHasAStep(event);
+        }
+    }
+
+    protected void fireBallHasAMoved(Ball ball) {
+        BallActionEvent event = new BallActionEvent(ball);
+        event.setBall(ball);
+        for (Object listener: _ballListeners) {
+            ((BallActionListener)listener).ballHasAMoved(event);
         }
     }
 }

@@ -7,10 +7,13 @@ import Model.gamefield.CellRow;
 import Model.gamefield.Direction;
 import Model.gamefield.GameField;
 import Model.units.Ball;
+import Model.units.Goal;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,16 +29,6 @@ public class GameFieldView extends JPanel {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-//        constraints.gridy = 0;
-//        for (CellRow cellRow: _field.cellRows()) {
-//            constraints.gridx = 0;
-//            for(Cell cell: cellRow.cells()) {
-//                add(new CellWidget(new Cell()), constraints);
-//                constraints.gridx++;
-//            }
-//            constraints.gridy++;
-//        }
-
         constraints.gridy = 0;
         for (CellRow cellRow : _field.cellRows()) {
             constraints.gridx = cellRow.startOfLine();
@@ -46,7 +39,6 @@ public class GameFieldView extends JPanel {
             constraints.gridy++;
         }
 
-        //addMouseMotionListener(new MouseController());
         addMouseListener(new MouseController());
         setFocusable(true);
     }
@@ -88,11 +80,8 @@ public class GameFieldView extends JPanel {
                 }
 
                 if (direct != null) {
-                    if (_field.cellRows().get(originalRowIndex).getCell(originalCellIndex - _field.cellRows().get(originalRowIndex).startOfLine()).getUnit() instanceof Ball) {
-
-                        Ball ball = (Ball) _field.cellRows().get(originalRowIndex).getCell(originalCellIndex - _field.cellRows().get(originalRowIndex).startOfLine()).getUnit();
+                    if (_field.cellRows().get(originalRowIndex).getCell(originalCellIndex - _field.cellRows().get(originalRowIndex).startOfLine()).getUnit() instanceof Ball ball) {
                         ball.move(direct);
-                        //repaint();
                     }
                 }
             }
