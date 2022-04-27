@@ -61,7 +61,7 @@ public class GameFrame extends JFrame {
 
         @Override
         public void ballHasDisappeared(BallActionEvent e) {
-
+            _mainBox.repaint();
         }
 
         @Override

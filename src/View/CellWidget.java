@@ -4,6 +4,12 @@ import Model.Unit;
 import Model.events.BallActionEvent;
 import Model.events.BallActionListener;
 import Model.gamefield.Cell;
+import Model.units.Ball;
+import Model.units.Barrier;
+import Model.units.Goal;
+import View.UnitWidgets.BallWidget;
+import View.UnitWidgets.BarrierWidget;
+import View.UnitWidgets.GoalWidget;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,15 +19,16 @@ import java.util.Map;
 public class CellWidget extends JPanel  {
 
     public static final int CELL_SIZE = 65;
-    private static final Color BACKGROUND_COLOR = new Color(252, 252, 196);
-    private static final Color RECT_COLOR = new Color(100, 100, 100);
-    private static final Color FONT_COLOR = new Color(54, 190, 82);
+    private static final Color BACKGROUND_COLOR = new Color(180, 180, 180);
+    //private static final Color RECT_COLOR = BACKGROUND_COLOR;
+    private static final Color RECT_COLOR = new Color(180, 180, 180);
 
     private final Cell _cell;
 
     public CellWidget(Cell cell) {
 
         setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
+
         setBackground(BACKGROUND_COLOR);
 
         _cell = cell;
@@ -40,17 +47,17 @@ public class CellWidget extends JPanel  {
         Unit u = _cell.getUnit();
 
         if(u != null) {
-            String msg = u.toString();
+            UnitWidget uw = new UnitWidget(u, g);
 
-            gr2d.setColor( FONT_COLOR );
-            gr2d.setFont( new Font( "Microsoft JhengHei Light", Font.BOLD, 20 ));
+            if (u instanceof Ball) {
+                 uw = new BallWidget(u, g);
+            } else if (u instanceof Goal) {
+                uw = new GoalWidget(u, g);
+            } else if (u instanceof Barrier) {
+                uw = new BarrierWidget(u, g);
+            }
 
-            FontMetrics fm = g.getFontMetrics();
-
-            int msgWidth = fm.stringWidth( msg );
-            int msgHeight = fm.getHeight();
-
-            gr2d.drawString( msg, (CELL_SIZE - msgWidth)/2, CELL_SIZE/2 + msgHeight/4 );
+            this.add(uw);
         }
     }
 }

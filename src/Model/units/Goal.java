@@ -12,6 +12,8 @@ public class Goal extends Unit {
 
     private Color _color;
 
+    public Color color() { return _color; }
+
     private ArrayList<Ball> _balls = new ArrayList<>();
 
     public Goal(Color color) {
