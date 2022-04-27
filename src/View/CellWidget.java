@@ -7,9 +7,11 @@ import Model.gamefield.Cell;
 import Model.units.Ball;
 import Model.units.Barrier;
 import Model.units.Goal;
+import Model.units.MulticoloredGoal;
 import View.UnitWidgets.BallWidget;
 import View.UnitWidgets.BarrierWidget;
 import View.UnitWidgets.GoalWidget;
+import View.UnitWidgets.MulticoloredGoalWidget;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +22,6 @@ public class CellWidget extends JPanel  {
 
     public static final int CELL_SIZE = 65;
     private static final Color BACKGROUND_COLOR = new Color(180, 180, 180);
-    //private static final Color RECT_COLOR = BACKGROUND_COLOR;
     private static final Color RECT_COLOR = new Color(180, 180, 180);
 
     private final Cell _cell;
@@ -37,6 +38,7 @@ public class CellWidget extends JPanel  {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        super.paintComponent(g);
 
         Graphics2D gr2d = (Graphics2D) g;
         gr2d.setStroke( new BasicStroke(2) );
@@ -51,6 +53,8 @@ public class CellWidget extends JPanel  {
 
             if (u instanceof Ball) {
                  uw = new BallWidget(u, g);
+            } else if (u instanceof MulticoloredGoal) {
+                uw = new MulticoloredGoalWidget(u, g);
             } else if (u instanceof Goal) {
                 uw = new GoalWidget(u, g);
             } else if (u instanceof Barrier) {

@@ -11,15 +11,13 @@ public class GoalWidget extends UnitWidget {
     public GoalWidget(Unit unit, Graphics g) {
         super(unit, g);
 
-        setImg("src\\View\\UnitWidgets\\images\\goal1.png");
+        setImg("src\\View\\UnitWidgets\\images\\square.png");
 
         paint(g);
     }
 
     @Override
     public void paint(Graphics g) {
-        if (getImg() == null) { return; }
-
-        g.drawImage(getImg(), 0, 0, 65, 65, ((Goal) getUnit()).color(), null);
+        g.drawImage(_img, 0, 0, 65, 65, ((Goal) _unit).color(), null);
     }
 }

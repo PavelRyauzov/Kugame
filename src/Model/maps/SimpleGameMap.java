@@ -7,6 +7,7 @@ import Model.gamefield.GameMap;
 import Model.units.Ball;
 import Model.units.Barrier;
 import Model.units.Goal;
+import Model.units.MulticoloredGoal;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -119,7 +120,11 @@ public class SimpleGameMap implements GameMap {
         Goal greenGoal = new Goal(Color.green);
         cellRows.get(9).getCell(8).setUnit(greenGoal);
 
-        Goal blueGoal = new Goal(Color.blue);
+//        Goal blueGoal = new Goal(Color.blue);
+//        cellRows.get(3).getCell(9).setUnit(blueGoal);
+
+        Goal blueGoal = new MulticoloredGoal(Color.blue);
+        ((MulticoloredGoal)blueGoal).addColor(Color.green);
         cellRows.get(3).getCell(9).setUnit(blueGoal);
 //
 //        Goal blueGoal = new Goal(Color.blue);

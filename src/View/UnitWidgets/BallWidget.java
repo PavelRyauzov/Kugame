@@ -24,8 +24,6 @@ public class BallWidget extends UnitWidget {
 
     @Override
     public void paint(Graphics g) {
-        if (getImg() == null) { return; }
-
-        g.drawImage(getImg(), 0, 0, 65, 65, ((Ball) getUnit()).color(), null);
+        g.drawImage(_img, 0, 0, 65, 65, ((Ball) _unit).color(), null);
     }
 }

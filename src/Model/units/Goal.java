@@ -14,11 +14,13 @@ public class Goal extends Unit {
 
     public Color color() { return _color; }
 
-    private ArrayList<Ball> _balls = new ArrayList<>();
+    protected ArrayList<Ball> _balls = new ArrayList<>();
 
     public Goal(Color color) {
         _color = color;
     }
+
+    protected Goal() {}
 
     public boolean canPass(Ball ball) {
         return ball.color() == _color;
