@@ -17,7 +17,7 @@ public class BallWidget extends UnitWidget {
     public BallWidget(Unit unit, Graphics g) {
         super(unit, g);
 
-        setImg("src\\View\\UnitWidgets\\images\\ball1.png");
+        setImg("src/View/UnitWidgets/images/ball1.png");
 
         paint(g);
     }

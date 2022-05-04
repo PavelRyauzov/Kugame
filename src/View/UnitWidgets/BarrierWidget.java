@@ -11,7 +11,7 @@ public class BarrierWidget extends UnitWidget {
     public BarrierWidget(Unit unit, Graphics g) {
         super(unit, g);
 
-        setImg("src\\View\\UnitWidgets\\images\\square.png");
+        setImg("src/View/UnitWidgets/images/square.png");
 
         paint(g);
     }

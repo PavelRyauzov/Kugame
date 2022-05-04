@@ -12,7 +12,7 @@ public class MulticoloredGoalWidget extends UnitWidget {
     public MulticoloredGoalWidget(Unit unit, Graphics g) {
         super(unit, g);
 
-        setImg("src\\View\\UnitWidgets\\images\\mc.png");
+        setImg("src/View/UnitWidgets/images/mc.png");
 
         paint(g);
     }
