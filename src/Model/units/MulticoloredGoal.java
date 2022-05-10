@@ -11,9 +11,9 @@ public class MulticoloredGoal extends Goal{
         return _colors;
     }
 
-    public MulticoloredGoal(Color color) {
+    public MulticoloredGoal(ArrayList<Color> colors) {
         super();
-        _colors.add(color);
+        _colors = colors;
     }
 
     public void addColor(Color color) {

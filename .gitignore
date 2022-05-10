@@ -18,4 +18,9 @@ out/
 *.ipr
 *.iws
 
+## Astah
+
+*.asta
+*.asta.lock
+
 

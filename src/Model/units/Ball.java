@@ -56,6 +56,13 @@ public class Ball extends Unit {
         @Override
         public void run() {
 
+            if(getOwner() == null) {
+                _timer.cancel();
+                fireBallHasDisappeared();
+                fireBallHasAMoved();
+                return;
+            }
+
             if (canMoveTo(getOwner().neighbor(_direction))) {
                 doStep(_direction);
                 fireBallHasAStep();

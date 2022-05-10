@@ -4,14 +4,8 @@ import Model.Unit;
 import Model.events.BallActionEvent;
 import Model.events.BallActionListener;
 import Model.gamefield.Cell;
-import Model.units.Ball;
-import Model.units.Barrier;
-import Model.units.Goal;
-import Model.units.MulticoloredGoal;
-import View.UnitWidgets.BallWidget;
-import View.UnitWidgets.BarrierWidget;
-import View.UnitWidgets.GoalWidget;
-import View.UnitWidgets.MulticoloredGoalWidget;
+import Model.units.*;
+import View.UnitWidgets.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +47,8 @@ public class CellWidget extends JPanel  {
 
             if (u instanceof Ball) {
                  uw = new BallWidget(u, g);
+            } else if (u instanceof PullingGoal) {
+                uw = new PullingGoalWidget(u, g);
             } else if (u instanceof MulticoloredGoal) {
                 uw = new MulticoloredGoalWidget(u, g);
             } else if (u instanceof Goal) {

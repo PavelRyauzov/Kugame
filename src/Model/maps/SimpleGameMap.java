@@ -4,10 +4,7 @@ import Model.gamefield.CellRow;
 import Model.gamefield.Direction;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
-import Model.units.Ball;
-import Model.units.Barrier;
-import Model.units.Goal;
-import Model.units.MulticoloredGoal;
+import Model.units.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -84,7 +81,7 @@ public class SimpleGameMap implements GameMap {
         // Расставляем препятствия внутри поля
         cellRows.get(3).getCell(2).setUnit(new Barrier());
 
-        cellRows.get(4).getCell(8).setUnit(new Barrier());
+        //cellRows.get(4).getCell(8).setUnit(new Barrier());
 
         return this;
     }
@@ -122,13 +119,15 @@ public class SimpleGameMap implements GameMap {
 
 //        Goal blueGoal = new Goal(Color.blue);
 //        cellRows.get(3).getCell(9).setUnit(blueGoal);
-
-        Goal blueGoal = new MulticoloredGoal(Color.blue);
-        ((MulticoloredGoal)blueGoal).addColor(Color.green);
-        cellRows.get(3).getCell(9).setUnit(blueGoal);
 //
-//        Goal blueGoal = new Goal(Color.blue);
+//        ArrayList<Color> colors = new ArrayList<>();
+//        colors.add(Color.blue);
+//        colors.add(Color.green);
+//        Goal blueGoal = new MulticoloredGoal(colors);
 //        cellRows.get(3).getCell(9).setUnit(blueGoal);
+
+        Goal pullingGoal = new PullingGoal(Color.blue, Direction.west());
+        cellRows.get(3).getCell(9).setUnit(pullingGoal);
 
         return this;
     }
