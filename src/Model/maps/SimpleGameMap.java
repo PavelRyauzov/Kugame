@@ -81,7 +81,7 @@ public class SimpleGameMap implements GameMap {
         // Расставляем препятствия внутри поля
         cellRows.get(3).getCell(2).setUnit(new Barrier());
 
-        //cellRows.get(4).getCell(8).setUnit(new Barrier());
+        cellRows.get(4).getCell(8).setUnit(new Barrier());
 
         return this;
     }
@@ -117,8 +117,8 @@ public class SimpleGameMap implements GameMap {
         Goal greenGoal = new Goal(Color.green);
         cellRows.get(9).getCell(8).setUnit(greenGoal);
 
-//        Goal blueGoal = new Goal(Color.blue);
-//        cellRows.get(3).getCell(9).setUnit(blueGoal);
+        Goal blueGoal = new Goal(Color.blue);
+        cellRows.get(3).getCell(9).setUnit(blueGoal);
 //
 //        ArrayList<Color> colors = new ArrayList<>();
 //        colors.add(Color.blue);
@@ -126,8 +126,8 @@ public class SimpleGameMap implements GameMap {
 //        Goal blueGoal = new MulticoloredGoal(colors);
 //        cellRows.get(3).getCell(9).setUnit(blueGoal);
 
-        Goal pullingGoal = new PullingGoal(Color.blue, Direction.west());
-        cellRows.get(3).getCell(9).setUnit(pullingGoal);
+//        Goal pullingGoal = new PullingGoal(Color.blue, Direction.west());
+//        cellRows.get(3).getCell(9).setUnit(pullingGoal);
 
         return this;
     }

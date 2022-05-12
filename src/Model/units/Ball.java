@@ -58,6 +58,7 @@ public class Ball extends Unit {
 
             if(getOwner() == null) {
                 _timer.cancel();
+                fireBallHasAStep();
                 fireBallHasDisappeared();
                 fireBallHasAMoved();
                 return;

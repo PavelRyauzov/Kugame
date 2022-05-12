@@ -22,8 +22,8 @@ public class PullingGoal extends Goal {
         Timer timer = new Timer();
         TimerTask task = new PullingGoalTimerTask(timer, _pullDirection);
 
-        int delay = 0;
-        int period = 10;
+        int delay = 100;
+        int period = 100;
         timer.schedule(task, delay, period);
     }
     private class PullingGoalTimerTask extends TimerTask {
