@@ -1,6 +1,7 @@
 package Model.units;
 
 import Model.Unit;
+import Model.events.BallActionCreator;
 import Model.events.BallActionEvent;
 import Model.events.BallActionListener;
 import Model.gamefield.Cell;
@@ -56,29 +57,20 @@ public class Ball extends Unit {
         @Override
         public void run() {
 
-            if(getOwner() == null) {
-                _timer.cancel();
-                fireBallHasAStep();
-                fireBallHasDisappeared();
-                fireBallHasAMoved();
-                return;
-            }
+//            if(getOwner() == null) {
+//                _timer.cancel();
+//                fireBallHasAStep();
+//                fireBallHasDisappeared();
+//                fireBallHasAMoved();
+//                return;
+//            }
 
             if (canMoveTo(getOwner().neighbor(_direction))) {
                 doStep(_direction);
-                fireBallHasAStep();
             } else {
                 _timer.cancel();
 
-                if (getOwner().neighbor(_direction).getUnit() instanceof Goal goal) {
-
-                    if(goal.canPass(_ball)) {
-                        goal.takeBall(_ball);
-                        fireBallHasDisappeared();
-                    }
-                }
-
-                fireBallHasAMoved();
+                ballActionCreator().fireBallHasAMoved(this._ball, _direction);
             }
         }
     }
@@ -96,45 +88,13 @@ public class Ball extends Unit {
         }
 
         neighborCell.setUnit(getOwner().extractUnit());
-    }
 
+        ballActionCreator().fireBallHasAStep(this);
+    }
 
     // ------------------ Порождает события, связанные с движением Шарика ---------------------
-
-    private List<BallActionListener> _listeners = new ArrayList<>();
-
-    public void addBallActionListener(BallActionListener listener) {
-        _listeners.add(listener);
-    }
-
-    public void removeBallActionListener(BallActionListener listener) {
-        _listeners.remove(listener);
-    }
-
-    protected void fireBallHasDisappeared() {
-
-        BallActionEvent event = new BallActionEvent(this);
-        event.setBall(this);
-        for (Object listener: _listeners) {
-            ((BallActionListener)listener).ballHasDisappeared(event);
-        }
-    }
-
-    protected void fireBallHasAStep() {
-        BallActionEvent event = new BallActionEvent(this);
-        event.setBall(this);
-        for (Object listener: _listeners) {
-            ((BallActionListener)listener).ballHasAStep(event);
-        }
-    }
-
-    protected void fireBallHasAMoved() {
-        BallActionEvent event = new BallActionEvent(this);
-        event.setBall(this);
-        for (Object listener: _listeners) {
-            ((BallActionListener)listener).ballHasAMoved(event);
-        }
-    }
+    private BallActionCreator _ballActionCreator = new BallActionCreator();
+    public BallActionCreator ballActionCreator() { return _ballActionCreator; }
 
     @Override
     public String toString() {

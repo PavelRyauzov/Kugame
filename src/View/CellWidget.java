@@ -1,16 +1,12 @@
 package View;
 
 import Model.Unit;
-import Model.events.BallActionEvent;
-import Model.events.BallActionListener;
 import Model.gamefield.Cell;
 import Model.units.*;
 import View.UnitWidgets.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.Map;
 
 public class CellWidget extends JPanel  {
 
@@ -47,12 +43,12 @@ public class CellWidget extends JPanel  {
 
             if (u instanceof Ball) {
                  uw = new BallWidget(u, g);
-            } else if (u instanceof PullingGoal) {
-                uw = new PullingGoalWidget(u, g);
+//            } else if (u instanceof PullingGoal) {
+//                uw = new PullingGoalWidget(u, g);
+            } else if (u instanceof SingleColoredGoal) {
+                uw = new SingleColoredGoalWidget(u, g);
             } else if (u instanceof MulticoloredGoal) {
                 uw = new MulticoloredGoalWidget(u, g);
-            } else if (u instanceof Goal) {
-                uw = new GoalWidget(u, g);
             } else if (u instanceof Barrier) {
                 uw = new BarrierWidget(u, g);
             }

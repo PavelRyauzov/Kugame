@@ -8,12 +8,13 @@ import Model.units.*;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SimpleGameMap implements GameMap {
 
     private ArrayList<CellRow> cellRows = new ArrayList<>();
     private ArrayList<Ball> balls = new ArrayList<>();
+
+    private ArrayList<MulticoloredGoal> goals = new ArrayList<>();
 
     public SimpleGameMap() {
         super();
@@ -111,14 +112,17 @@ public class SimpleGameMap implements GameMap {
     @Override
     public GameMap seedGoals() {
 
-        Goal redGoal = new Goal(Color.red);
+        SingleColoredGoal redGoal = new SingleColoredGoal(Color.red);
         cellRows.get(9).getCell(3).setUnit(redGoal);
+        goals.add(redGoal);
 
-        Goal greenGoal = new Goal(Color.green);
+        SingleColoredGoal greenGoal = new SingleColoredGoal(Color.green);
         cellRows.get(9).getCell(8).setUnit(greenGoal);
+        goals.add(greenGoal);
 
-        Goal blueGoal = new Goal(Color.blue);
+        SingleColoredGoal blueGoal = new SingleColoredGoal(Color.blue);
         cellRows.get(3).getCell(9).setUnit(blueGoal);
+        goals.add(blueGoal);
 //
 //        ArrayList<Color> colors = new ArrayList<>();
 //        colors.add(Color.blue);
@@ -133,5 +137,5 @@ public class SimpleGameMap implements GameMap {
     }
 
     @Override
-    public GameField build() { return new GameField(cellRows, balls); }
+    public GameField build() { return new GameField(cellRows, balls, goals); }
 }

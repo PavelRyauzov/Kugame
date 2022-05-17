@@ -1,7 +1,7 @@
 package View.UnitWidgets;
 
 import Model.Unit;
-import Model.units.Goal;
+import Model.units.MulticoloredGoal;
 import View.UnitWidget;
 
 import java.awt.*;
@@ -19,6 +19,6 @@ public class PullingGoalWidget extends UnitWidget {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(_img, 0, 0, 65, 65, ((Goal) _unit).color(),null);
+        g.drawImage(_img, 0, 0, 65, 65,null);
     }
 }

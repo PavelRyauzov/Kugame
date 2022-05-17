@@ -1,11 +1,9 @@
 package View.UnitWidgets;
 
 import Model.Unit;
-import Model.units.Goal;
 import View.UnitWidget;
 
 import java.awt.*;
-import java.io.File;
 
 public class BarrierWidget extends UnitWidget {
     public BarrierWidget(Unit unit, Graphics g) {

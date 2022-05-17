@@ -5,6 +5,7 @@ import Model.events.BallActionEvent;
 import Model.events.BallActionListener;
 import Model.events.GameEvent;
 import Model.events.GameListener;
+import Model.gamefield.Direction;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
 import Model.maps.SimpleGameMap;
@@ -27,7 +28,7 @@ public class GameFrame extends JFrame {
         _game.addGameListener(new GameObserver());
 
         for (Ball ball: _game.field().balls()) {
-            _game.addBallActionListener(new BallObserver());
+            _game.ballActionCreator().addBallActionListener(new BallObserver());
         }
 
         _mainBox = new GameFieldView(_game.field());
@@ -60,18 +61,14 @@ public class GameFrame extends JFrame {
     private class BallObserver implements BallActionListener {
 
         @Override
-        public void ballHasDisappeared(BallActionEvent e) {
-            _mainBox.repaint();
-        }
-
-        @Override
         public void ballHasAStep(BallActionEvent e) {
             setEnabled(false);
             _mainBox.repaint();
         }
 
         @Override
-        public void ballHasAMoved(BallActionEvent e) {
+        public void ballHasAMoved(BallActionEvent e, Direction direction) {
+            _mainBox.repaint();
             setEnabled(true);
         }
     }

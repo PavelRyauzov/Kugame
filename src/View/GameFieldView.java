@@ -1,21 +1,14 @@
 package View;
 
-import Model.events.BallActionEvent;
-import Model.events.BallActionListener;
 import Model.gamefield.Cell;
 import Model.gamefield.CellRow;
 import Model.gamefield.Direction;
 import Model.gamefield.GameField;
 import Model.units.Ball;
-import Model.units.Goal;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameFieldView extends JPanel {
 

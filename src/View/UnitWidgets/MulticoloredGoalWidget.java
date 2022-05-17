@@ -1,8 +1,6 @@
 package View.UnitWidgets;
 
 import Model.Unit;
-import Model.units.Goal;
-import Model.units.MulticoloredGoal;
 import View.UnitWidget;
 
 import java.awt.*;
