@@ -6,3 +6,7 @@
 ### Необходимо загнать цветные шарики в ворота соответствующего цвета.
 
 ![image](https://user-images.githubusercontent.com/82666483/160910437-02259874-b5f4-40e0-892a-af2d0b5e162d.png)
+
+### Диаграмма классов.
+
+<img width="955" alt="Снимок экрана 2022-06-05 в 16 46 48" src="https://user-images.githubusercontent.com/82666483/172053796-0c38ad15-e657-4eff-9f6d-0baca8863248.png">
