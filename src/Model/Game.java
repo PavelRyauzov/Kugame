@@ -3,6 +3,7 @@ package Model;
 import Model.events.*;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
+import Model.units.AbstractGoal;
 import Model.units.Ball;
 import Model.units.MulticoloredGoal;
 import Model.units.SingleColoredGoal;
@@ -32,7 +33,7 @@ public class Game {
         _field = constructLevel();
 
         // Связываем слушателей событий в виде ворот и источников событий в виде Шариков
-        for (MulticoloredGoal goal: _field.goals()) {
+        for (AbstractGoal goal: _field.goals()) {
             for (Ball ball: _field.balls()) {
                 ball.ballActionCreator().addBallActionListener(new BallObserver(goal));
             }

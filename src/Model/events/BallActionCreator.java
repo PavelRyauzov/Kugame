@@ -18,9 +18,10 @@ public class BallActionCreator {
         _ballListeners.remove(listener);
     }
 
-    public void fireBallHasAStep(Ball ball) {
+    public void fireBallHasAStep(Ball ball, Direction direction) {
         BallActionEvent event = new BallActionEvent(ball);
         event.setBall(ball);
+        event.setDirection(direction);
         for (Object listener: _ballListeners) {
             ((BallActionListener)listener).ballHasAStep(event);
         }
@@ -31,7 +32,7 @@ public class BallActionCreator {
         event.setBall(ball);
         event.setDirection(direction);
         for (Object listener: _ballListeners) {
-            ((BallActionListener)listener).ballHasAMoved(event, direction);
+            ((BallActionListener)listener).ballHasAMoved(event);
         }
     }
 }

@@ -1,6 +1,7 @@
 package Model.gamefield;
 
 import Model.Unit;
+import Model.units.AbstractGoal;
 import Model.units.Ball;
 import Model.units.MulticoloredGoal;
 
@@ -21,9 +22,9 @@ public class GameField {
     public ArrayList<Ball> balls() { return _balls; }
 
     // ------------------------- Ворота -----------------------
-    private ArrayList<MulticoloredGoal> _goals;
+    private ArrayList<AbstractGoal> _goals;
 
-    public ArrayList<MulticoloredGoal> goals() { return _goals; }
+    public ArrayList<AbstractGoal> goals() { return _goals; }
 
     public void deleteBall(Ball ball) { _balls.remove(ball); }
 
@@ -32,7 +33,7 @@ public class GameField {
         super();
     }
 
-    public GameField(ArrayList<CellRow> cellRows, ArrayList<Ball> balls, ArrayList<MulticoloredGoal> goals) {
+    public GameField(ArrayList<CellRow> cellRows, ArrayList<Ball> balls, ArrayList<AbstractGoal> goals) {
         this();
         _cellRows = cellRows;
         _balls = balls;

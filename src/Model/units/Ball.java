@@ -57,15 +57,7 @@ public class Ball extends Unit {
         @Override
         public void run() {
 
-//            if(getOwner() == null) {
-//                _timer.cancel();
-//                fireBallHasAStep();
-//                fireBallHasDisappeared();
-//                fireBallHasAMoved();
-//                return;
-//            }
-
-            if (canMoveTo(getOwner().neighbor(_direction))) {
+            if (getOwner() != null && canMoveTo(getOwner().neighbor(_direction))) {
                 doStep(_direction);
             } else {
                 _timer.cancel();
@@ -89,7 +81,7 @@ public class Ball extends Unit {
 
         neighborCell.setUnit(getOwner().extractUnit());
 
-        ballActionCreator().fireBallHasAStep(this);
+        ballActionCreator().fireBallHasAStep(this, direct);
     }
 
     // ------------------ Порождает события, связанные с движением Шарика ---------------------

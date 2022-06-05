@@ -10,5 +10,5 @@ import java.util.EventListener;
 public interface BallActionListener extends EventListener {
 
     void ballHasAStep(BallActionEvent e);
-    void ballHasAMoved(BallActionEvent e, Direction direction);
+    void ballHasAMoved(BallActionEvent e);
 }

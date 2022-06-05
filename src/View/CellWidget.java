@@ -43,8 +43,8 @@ public class CellWidget extends JPanel  {
 
             if (u instanceof Ball) {
                  uw = new BallWidget(u, g);
-//            } else if (u instanceof PullingGoal) {
-//                uw = new PullingGoalWidget(u, g);
+            } else if (u instanceof PullingGoal) {
+                uw = new PullingGoalWidget(u, g);
             } else if (u instanceof SingleColoredGoal) {
                 uw = new SingleColoredGoalWidget(u, g);
             } else if (u instanceof MulticoloredGoal) {

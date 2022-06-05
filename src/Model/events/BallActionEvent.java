@@ -23,9 +23,8 @@ public class BallActionEvent extends EventObject {
     public void setDirection(Direction direction) {
         _ballMovingDirection = direction;
     }
-    public Direction ballMovingDirection(){
-        return _ballMovingDirection;
-    }
+
+    public Direction direction() { return _ballMovingDirection; }
 
     // Событие связанное с деятельностью Шарика
     public BallActionEvent(Object source) {

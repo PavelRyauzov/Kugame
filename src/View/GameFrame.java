@@ -9,6 +9,7 @@ import Model.gamefield.Direction;
 import Model.gamefield.GameField;
 import Model.gamefield.GameMap;
 import Model.maps.SimpleGameMap;
+import Model.maps.TestSimpleGameMap;
 import Model.units.Ball;
 
 import javax.swing.*;
@@ -67,7 +68,7 @@ public class GameFrame extends JFrame {
         }
 
         @Override
-        public void ballHasAMoved(BallActionEvent e, Direction direction) {
+        public void ballHasAMoved(BallActionEvent e_) {
             _mainBox.repaint();
             setEnabled(true);
         }
